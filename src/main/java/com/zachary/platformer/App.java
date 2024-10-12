@@ -9,7 +9,7 @@ public class App extends JFrame implements Runnable {
 
 	public App() {
 		setTitle("Simple Java Platformer");
-		setSize(800, 600); // Set the window size
+		setSize(1000, 1000); // Set the window size
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
@@ -36,22 +36,26 @@ public class App extends JFrame implements Runnable {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		// Draw game elements here (e.g., player, platforms)
 
-		// Get the size of the window and assign it to windowHeight and windowWidth
-		int windowHeight = getHeight();
-		int windowWidth = getWidth();
-		System.out.println("Window width: " + windowWidth + " Window height: " + windowHeight);
 		// g.setColor(Color.GREEN);
 		// g.fillRect(0, 0, 90, 90);
 
-		int penPosition = 0;
+		int squareSize = 50;
 
-		for (int i = 0; i < windowWidth; i++) {
-			penPosition = penPosition + 5;
-			if (i % 5 == 0) {
-				g.setColor(Color.GREEN);
-				g.fillRect(penPosition, 10, 2, 2);
+		int penPosX;
+		int penPosY;
+
+		for (penPosX = 0; penPosX < getWidth(); penPosX += squareSize) {
+			for (penPosY = 0; penPosY < getHeight(); penPosY += squareSize) {
+				if ((penPosX / squareSize + penPosY / squareSize) % 2 == 0) {
+					g.setColor(Color.GREEN); // Set color for the square
+				} else {
+					g.setColor(Color.RED); // Alternate color
+				}
+				g.fillRect(penPosX, penPosY, squareSize, squareSize);
 			}
+
 		}
+
 	}
 
 	public static void main(String[] args) {
